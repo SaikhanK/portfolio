@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – Fullstack Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <span class="logo-bracket">{</span>
+      <span class="logo-name">dev</span>
+      <span class="logo-bracket">}</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about" data-label="01">About</a></li>
+      <li><a href="#skills" data-label="02">Skills</a></li>
+      <li><a href="#projects" data-label="03">Projects</a></li>
+      <li><a href="#contact" data-label="04">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span>open to work</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-text">FULLSTACK</div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-line"></span>
+        <span>Fullstack Developer</span>
+      </div>
+      <h1 class="hero-name">
+        <span class="line" id="heroLine1">Max</span>
+        <span class="line accent" id="heroLine2">Mustermann</span>
+      </h1>
+      <p class="hero-sub">
+        Ich baue skalierbare Web-Applikationen –<br />
+        von der Datenbank bis zur UI.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">Projekte ansehen</a>
+        <a href="#contact" class="btn-ghost">Kontakt aufnehmen</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-label">Jahre<br/>Erfahrung</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-target="20">0</span>
+        <span class="stat-label">Projekte<br/>abgeschlossen</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Tech-Stacks<br/>beherrscht</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">
+      <span class="label-num">01</span>
+      <span class="label-text">About</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-img-wrapper">
+        <div class="about-img-placeholder">
+          <div class="img-initials">MM</div>
+          <div class="img-ring"></div>
+          <div class="img-corner tl"></div>
+          <div class="img-corner tr"></div>
+          <div class="img-corner bl"></div>
+          <div class="img-corner br"></div>
+        </div>
+        <div class="about-img-tag">
+          <span class="dm-mono">// based in Germany</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <h2 class="section-heading">Ich bringe Ideen<br/><em>zum Leben</em></h2>
+        <p>
+          Als Fullstack-Entwickler arbeite ich leidenschaftlich an Produkten, 
+          die sowohl technisch einwandfrei als auch nutzerzentriert sind. 
+          Mein Fokus liegt auf sauberem Code, durchdachter Architektur und 
+          reibungsloser Developer Experience.
+        </p>
+        <p>
+          Ich habe mit Start-ups und größeren Teams zusammengearbeitet und 
+          bringe Projekte vom ersten Konzept bis zum Live-Deployment. 
+          Ich lerne schnell, kommuniziere klar und liefere verlässlich.
+        </p>
+        <div class="about-highlights">
+          <div class="highlight">
+            <span class="dm-mono accent-text">→</span>
+            <span>Clean Code & Best Practices</span>
+          </div>
+          <div class="highlight">
+            <span class="dm-mono accent-text">→</span>
+            <span>Agile / Scrum Workflows</span>
+          </div>
+          <div class="highlight">
+            <span class="dm-mono accent-text">→</span>
+            <span>CI/CD & DevOps Grundlagen</span>
+          </div>
+          <div class="highlight">
+            <span class="dm-mono accent-text">→</span>
+            <span>Team-Player & Selbstständig</span>
+          </div>
+        </div>
+        <a href="#" class="btn-primary" id="downloadCV">Lebenslauf herunterladen ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">
+      <span class="label-num">02</span>
+      <span class="label-text">Skills</span>
+    </div>
+    <h2 class="section-heading">Tech Stack</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <div class="skill-cat-label dm-mono">// Frontend</div>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Vue.js</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Tailwind</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label dm-mono">// Backend</div>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">GraphQL</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label dm-mono">// Database & Cloud</div>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Docker</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Vercel</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label dm-mono">// Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Jest</span>
+          <span class="tag">Vitest</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">
+      <span class="label-num">03</span>
+      <span class="label-text">Projects</span>
+    </div>
+    <h2 class="section-heading">Ausgewählte<br/><em>Projekte</em></h2>
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <div class="project-meta">
+          <span class="dm-mono project-num">001</span>
+          <div class="project-tags-small">
+            <span>React</span><span>Node.js</span><span>PostgreSQL</span>
+          </div>
+        </div>
+        <h3 class="project-title">Projektname Alpha</h3>
+        <p class="project-desc">
+          Eine vollständige SaaS-Plattform mit Authentifizierung, Dashboard 
+          und Echtzeit-Datenverarbeitung. Skalierbar gebaut für tausende Nutzer.
+        </p>
+        <div class="project-links">
+          <a href="#" class="project-link">Live ansehen →</a>
+          <a href="#" class="project-link ghost">GitHub</a>
+        </div>
+        <div class="project-accent"></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="dm-mono project-num">002</span>
+          <div class="project-tags-small">
+            <span>Next.js</span><span>Prisma</span><span>Docker</span>
+          </div>
+        </div>
+        <h3 class="project-title">Projektname Beta</h3>
+        <p class="project-desc">
+          E-Commerce-Backend mit automatisierter CI/CD-Pipeline, 
+          Container-Orchestrierung und Performance-Monitoring.
+        </p>
+        <div class="project-links">
+          <a href="#" class="project-link">Live ansehen →</a>
+          <a href="#" class="project-link ghost">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="dm-mono project-num">003</span>
+          <div class="project-tags-small">
+            <span>Python</span><span>FastAPI</span><span>Redis</span>
+          </div>
+        </div>
+        <h3 class="project-title">Projektname Gamma</h3>
+        <p class="project-desc">
+          REST API mit hohem Durchsatz, Rate-Limiting, Caching-Layer 
+          und vollständiger OpenAPI-Dokumentation.
+        </p>
+        <div class="project-links">
+          <a href="#" class="project-link">Live ansehen →</a>
+          <a href="#" class="project-link ghost">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="dm-mono project-num">004</span>
+          <div class="project-tags-small">
+            <span>Vue.js</span><span>GraphQL</span><span>AWS</span>
+          </div>
+        </div>
+        <h3 class="project-title">Projektname Delta</h3>
+        <p class="project-desc">
+          Internes Tool zur Datenverwaltung – gebaut für ein 
+          15-köpfiges Team mit komplexen Zugriffsrechten und Audit-Log.
+        </p>
+        <div class="project-links">
+          <a href="#" class="project-link">Live ansehen →</a>
+          <a href="#" class="project-link ghost">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">
+      <span class="label-num">04</span>
+      <span class="label-text">Contact</span>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-left">
+        <h2 class="section-heading contact-heading">
+          Lass uns<br/><em>zusammenarbeiten</em>
+        </h2>
+        <p class="contact-sub">
+          Ich bin offen für neue Positionen, Freelance-Projekte 
+          oder einfach einen guten Tech-Austausch.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:mail@example.com" class="contact-item">
+            <span class="dm-mono">mail</span>
+            <span class="contact-arrow">mail@example.com →</span>
+          </a>
+          <a href="https://github.com/" target="_blank" class="contact-item">
+            <span class="dm-mono">github</span>
+            <span class="contact-arrow">github.com/username →</span>
+          </a>
+          <a href="https://linkedin.com/" target="_blank" class="contact-item">
+            <span class="dm-mono">linkedin</span>
+            <span class="contact-arrow">linkedin.com/in/username →</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label class="dm-mono">// Name</label>
+            <input type="text" placeholder="Max Mustermann" required />
+          </div>
+          <div class="form-group">
+            <label class="dm-mono">// E-Mail</label>
+            <input type="email" placeholder="max@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="dm-mono">// Nachricht</label>
+            <textarea placeholder="Deine Nachricht..." rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width">
+            <span>Nachricht senden</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="dm-mono footer-copy">© 2025 Max Mustermann</span>
+      <span class="dm-mono footer-built">Built with ♥ & deployed on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
