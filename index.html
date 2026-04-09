@@ -464,6 +464,125 @@
       transform: none;
     }
 
+    /* ── IMAGE GALLERY INSIDE CARD ── */
+    .project-img {
+      cursor: pointer;
+      position: relative;
+    }
+    .project-img-count {
+      position: absolute;
+      bottom: 8px; right: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: #fff;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 4px;
+      padding: .15rem .45rem;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .project-img-zoom-hint {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(11,15,26,.45);
+      opacity: 0;
+      transition: opacity .25s;
+      z-index: 1;
+    }
+    .project-img-zoom-hint svg {
+      color: #fff;
+      filter: drop-shadow(0 0 8px rgba(59,130,246,.6));
+    }
+    .project-img:hover .project-img-zoom-hint { opacity: 1; }
+
+    /* ── LIGHTBOX OVERLAY ── */
+    #lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(7,11,20,.92);
+      backdrop-filter: blur(18px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.2rem;
+      padding: 1.5rem;
+    }
+    #lightbox.open { display: flex; }
+
+    #lightbox-img {
+      max-width: min(88vw, 1060px);
+      max-height: 72vh;
+      border-radius: 10px;
+      object-fit: contain;
+      border: 1px solid rgba(59,130,246,.25);
+      box-shadow: 0 0 60px rgba(59,130,246,.18);
+      animation: lbFadeIn .22s ease;
+    }
+    @keyframes lbFadeIn {
+      from { opacity: 0; transform: scale(.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    #lightbox-caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    #lightbox-controls {
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .lb-btn {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      border-radius: 8px;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background .2s, border-color .2s;
+      user-select: none;
+    }
+    .lb-btn:hover { background: rgba(59,130,246,.2); border-color: var(--blue); }
+    .lb-btn:disabled { opacity: .25; cursor: default; }
+
+    #lightbox-dots {
+      display: flex; gap: .45rem;
+    }
+    .lb-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .lb-dot.active {
+      background: var(--blue);
+      transform: scale(1.3);
+    }
+
+    #lightbox-close {
+      position: fixed; top: 1.2rem; right: 1.4rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      color: #fff;
+      border-radius: 8px;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background .2s;
+      z-index: 10;
+    }
+    #lightbox-close:hover { background: rgba(239,68,68,.3); border-color: #ef4444; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .hero-deco { display: none; }
@@ -471,6 +590,7 @@
       .nav-links { gap: 1.2rem; }
       section { padding: 4rem 5vw; }
       #hero { padding-left: 5vw; padding-right: 5vw; }
+      #lightbox-img { max-height: 60vh; }
     }
   </style>
 </head>
@@ -537,13 +657,15 @@
 
   <div class="projects-grid">
 
-    <!-- Bild einfügen: src="images/ki-app.png" in das <img> Tag eintragen -->
-    <div class="project-card reveal">
+    <!-- Bild einfügen: data-images='["images/ki-app.png","images/ki-app2.png"]' -->
+    <div class="project-card reveal" data-images='["images/1.1.png", "images/1.2.png", "images/1.3.png"]'>
       <div class="project-img">
-        <!-- <img src="images/ki-app.png" alt="KI-gestützte Webanwendung"> -->
         <div class="project-img-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          screenshot einfügen
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
         </div>
       </div>
       <div class="project-body">
@@ -559,13 +681,15 @@
       </div>
     </div>
 
-    <!-- Bild einfügen: src="images/bachelor-api.png" -->
-    <div class="project-card reveal">
+    <!-- Bild einfügen: data-images='["images/7.PNG","images/weiteres-bild.png"]' -->
+    <div class="project-card reveal" data-images='["images/7.PNG", "images/3.PNG"]'>
       <div class="project-img">
-        <!-- <img src="images/bachelor-api.png" alt="Bachelor API"> -->
         <div class="project-img-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          screenshot einfügen
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
         </div>
       </div>
       <div class="project-body">
@@ -581,13 +705,15 @@
       </div>
     </div>
 
-    <!-- Bild einfügen: src="images/social-media.png" -->
-    <div class="project-card reveal">
+    <!-- Bild einfügen: data-images='["images/social-media.png","images/social-media2.png"]' -->
+    <div class="project-card reveal" data-images='[]'>
       <div class="project-img">
-        <!-- <img src="images/social-media.png" alt="Social Media App"> -->
         <div class="project-img-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          screenshot einfügen
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
         </div>
       </div>
       <div class="project-body">
@@ -602,13 +728,15 @@
       </div>
     </div>
 
-    <!-- Bild einfügen: src="images/shop.png" -->
-    <div class="project-card reveal">
+    <!-- Bild einfügen: data-images='["images/shop.png","images/shop2.png"]' -->
+    <div class="project-card reveal" data-images='[]'>
       <div class="project-img">
-        <!-- <img src="images/shop.png" alt="Online Shop"> -->
         <div class="project-img-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          screenshot einfügen
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
         </div>
       </div>
       <div class="project-body">
@@ -622,13 +750,15 @@
       </div>
     </div>
 
-    <!-- Bild einfügen: src="images/rezepte.png" -->
-    <div class="project-card reveal">
+    <!-- Bild einfügen: data-images='["images/rezepte.png","images/rezepte2.png"]' -->
+    <div class="project-card reveal" data-images='[]'>
       <div class="project-img">
-        <!-- <img src="images/rezepte.png" alt="Rezepte App"> -->
         <div class="project-img-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          screenshot einfügen
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
         </div>
       </div>
       <div class="project-body">
@@ -751,10 +881,23 @@
     Ich bin offen für neue Stellen und spannende Projekte. Schreib mir gerne eine E-Mail oder schau auf GitHub vorbei.
   </p>
   <div class="contact-links reveal">
-    <a href="mailto:saikhan.khasukhanov@gmail.com" class="btn btn-primary">✉ E-Mail schreiben</a>
+    <a href="/cdn-cgi/l/email-protection#6d1e0c0406050c034306050c1e1806050c03021b2d0a000c0401430e0200"
+      class="btn btn-primary">✉ E-Mail schreiben</a>
     <a href="https://github.com/SaikhanK" target="_blank" class="btn btn-ghost">⌥ GitHub</a>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Bildvorschau">
+  <button id="lightbox-close" aria-label="Schließen">✕</button>
+  <img id="lightbox-img" src="" alt="Projektbild">
+  <div id="lightbox-caption"></div>
+  <div id="lightbox-controls">
+    <button class="lb-btn" id="lb-prev" aria-label="Vorheriges Bild">&#8592;</button>
+    <div id="lightbox-dots"></div>
+    <button class="lb-btn" id="lb-next" aria-label="Nächstes Bild">&#8594;</button>
+  </div>
+</div>
 
 <footer>
   <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);">
@@ -762,14 +905,14 @@
   </p>
 </footer>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-  // Intersection Observer for reveal + skill bars
+        // ── Intersection Observer for reveal + skill bars ──
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        // Trigger skill bar if applicable
         const fill = e.target.querySelector('.skill-fill');
         if (fill) {
           const w = fill.style.getPropertyValue('--w');
@@ -779,10 +922,9 @@
       }
     });
   }, { threshold: 0.12 });
-
   revealEls.forEach(el => io.observe(el));
 
-  // Skill items observer for bar animation
+        // ── Skill items observer ──
   const skillItems = document.querySelectorAll('.skill-item');
   const skillIo = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -794,7 +936,7 @@
   }, { threshold: 0.2 });
   skillItems.forEach(el => skillIo.observe(el));
 
-  // Typing effect in hero title
+        // ── Typing effect in hero title ──
   const titles = ['Fullstack Developer', 'Backend Engineer', 'API Builder', 'Django Specialist'];
   let ti = 0, ci = 0, deleting = false;
   const titleEl = document.querySelector('.hero-title');
@@ -810,9 +952,102 @@
       ci--;
       if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; }
     }
-    setTimeout(typeLoop, deleting ? 55 : 90);
+                setTimeout(typeLoop, deleting ? 45 : 80);
+              }
+              typeLoop();
+
+              // ── PROJECT GALLERY + LIGHTBOX ──
+              const lb = document.getElementById('lightbox');
+              const lbImg = document.getElementById('lightbox-img');
+              const lbCaption = document.getElementById('lightbox-caption');
+              const lbDots = document.getElementById('lightbox-dots');
+              const lbPrev = document.getElementById('lb-prev');
+              const lbNext = document.getElementById('lb-next');
+              const lbClose = document.getElementById('lightbox-close');
+
+              let lbImages = [];
+              let lbIndex = 0;
+
+              function renderDots() {
+                lbDots.innerHTML = '';
+                if (lbImages.length <= 1) { lbDots.style.display = 'none'; return; }
+                lbDots.style.display = 'flex';
+                lbImages.forEach((_, i) => {
+                  const d = document.createElement('span');
+                  d.className = 'lb-dot' + (i === lbIndex ? ' active' : '');
+                  d.addEventListener('click', () => showImage(i));
+                  lbDots.appendChild(d);
+                });
+              }
+
+              function showImage(index) {
+                lbIndex = index;
+                lbImg.style.animation = 'none';
+                lbImg.offsetHeight; // reflow
+                lbImg.style.animation = '';
+                lbImg.src = lbImages[index];
+                lbCaption.textContent = lbImages.length > 1
+                  ? `${index + 1} / ${lbImages.length}`
+                  : '';
+                lbPrev.disabled = index === 0;
+                lbNext.disabled = index === lbImages.length - 1;
+                renderDots();
+              }
+
+              function openLightbox(images, startIndex = 0) {
+                lbImages = images;
+                lb.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                // hide nav arrows if only one image
+                lbPrev.style.display = images.length > 1 ? '' : 'none';
+                lbNext.style.display = images.length > 1 ? '' : 'none';
+                showImage(startIndex);
+              }
+
+              function closeLightbox() {
+                lb.classList.remove('open');
+                document.body.style.overflow = '';
+                lbImg.src = '';
   }
-  setTimeout(typeLoop, 1200);
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  lbPrev.addEventListener('click', () => { if (lbIndex > 0) showImage(lbIndex - 1); });
+  lbNext.addEventListener('click', () => { if (lbIndex < lbImages.length - 1) showImage(lbIndex + 1); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && lbIndex > 0) showImage(lbIndex - 1);
+    if (e.key === 'ArrowRight' && lbIndex < lbImages.length - 1) showImage(lbIndex + 1);
+  });
+
+  // ── Build project card image areas from data-images ──
+  document.querySelectorAll('.project-card[data-images]').forEach(card => {
+    let images = [];
+    try { images = JSON.parse(card.dataset.images || '[]'); } catch (e) { }
+    // Remove empty strings
+    images = images.filter(Boolean);
+
+    const imgArea = card.querySelector('.project-img');
+    if (!imgArea) return;
+
+    if (images.length === 0) return; // no images → keep placeholder
+
+    // Replace content with first image
+    imgArea.innerHTML = `
+      <img src="${images[0]}" alt="Projektbild" loading="lazy">
+      <div class="project-img-zoom-hint">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+          <path d="M8 11h6M11 8v6"/>
+        </svg>
+      </div>
+      ${images.length > 1 ? `<span class="project-img-count">⊞ ${images.length}</span>` : ''}
+    `;
+
+    imgArea.addEventListener('click', () => openLightbox(images, 0));
+  });
 </script>
 </body>
 </html>
