@@ -258,7 +258,7 @@
     /* ── SKILLS ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 1rem;
     }
 
@@ -278,24 +278,73 @@
     }
     .skill-name {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .8rem;
+      font-size: .78rem;
       color: var(--text);
+      line-height: 1.3;
     }
-    .skill-bar {
-      height: 3px;
+    /* Dot rating system */
+    .skill-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .skill-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
       background: var(--bg3);
-      border-radius: 2px;
-      overflow: hidden;
+      border: 1.5px solid rgba(59,130,246,.25);
+      transition: background .4s ease, border-color .4s ease, box-shadow .4s ease;
     }
-    .skill-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      border-radius: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .8s cubic-bezier(.23,1,.32,1);
+    .skill-dot.filled {
+      background: var(--blue);
+      border-color: var(--blue);
+      box-shadow: 0 0 6px rgba(59,130,246,.5);
     }
-    .skill-item.visible .skill-fill { transform: scaleX(1); }
+    .skill-dot.filled.top {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-color: var(--cyan);
+      box-shadow: 0 0 8px rgba(103,232,249,.5);
+    }
+    /* Staggered animation: dots fill one by one when visible */
+    .skill-item.visible .skill-dot.filled:nth-child(1) { animation: dotPop .3s .0s both; }
+    .skill-item.visible .skill-dot.filled:nth-child(2) { animation: dotPop .3s .1s both; }
+    .skill-item.visible .skill-dot.filled:nth-child(3) { animation: dotPop .3s .2s both; }
+    .skill-item.visible .skill-dot.filled:nth-child(4) { animation: dotPop .3s .3s both; }
+    .skill-item.visible .skill-dot.filled:nth-child(5) { animation: dotPop .3s .4s both; }
+    @keyframes dotPop {
+      from { transform: scale(0); opacity: 0; }
+      60%  { transform: scale(1.3); }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    /* Legend */
+    .skills-legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+      padding: .9rem 1.2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .legend-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-dot.ld1 { background: var(--blue); border: 1.5px solid var(--blue); box-shadow: 0 0 5px rgba(59,130,246,.4); }
+    .legend-dot.ld2 { background: linear-gradient(135deg, var(--blue), var(--cyan)); border: 1.5px solid var(--cyan); box-shadow: 0 0 6px rgba(103,232,249,.4); }
+    .legend-dot.ld0 { background: var(--bg3); border: 1.5px solid rgba(59,130,246,.25); }
 
     /* ── PROJECTS ── */
     .projects-grid {
@@ -807,83 +856,199 @@
   <p class="section-label reveal">// 03 · technologien</p>
   <h2 class="section-title reveal">Skills<span class="line"></span></h2>
 
+  <!-- Skills Legend -->
+  <div class="skills-legend reveal">
+    <div class="legend-item">
+      <div class="legend-dot ld2"></div><span>5 · Expert</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot ld1"></div><span>4 · Fortgeschritten</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot ld1" style="opacity:.65"></div><span>3 · Solide</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot ld1" style="opacity:.4"></div><span>2 · Grundkenntnisse</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot ld0"></div><span>= Leer</span>
+    </div>
+  </div>
+
   <div class="skills-grid">
+    <!-- Python: 5/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Python</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.82"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+      </div>
     </div>
+    <!-- Django: 5/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Django</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.78"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+      </div>
     </div>
+    <!-- TypeScript: 4/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">TypeScript</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.76"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+      </div>
     </div>
+    <!-- NestJS: 3/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">NestJS</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.6"></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+        <div class="skill-dot"></div>
       </div>
-      </div>
-      <div class="skill-item reveal">
-        <span class="skill-name">Node.Js</span>
-        <div class="skill-bar">
-          <div class="skill-fill" style="--w:.65"></div>
-        </div>
-      </div>
-      <div class="skill-item reveal">
-      <span class="skill-name">Angular</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.68"></div></div>
     </div>
+    <!-- Node.js: 3/5 -->
+    <div class="skill-item reveal">
+      <span class="skill-name">Node.js</span>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+        <div class="skill-dot"></div>
+      </div>
+      </div>
+    <!-- Angular: 4/5 -->
+    <div class="skill-item reveal">
+      <span class="skill-name">Angular</span>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+      </div>
+    </div>
+    <!-- Java: 3/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Java</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.6"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+        <div class="skill-dot"></div>
+      </div>
     </div>
+    <!-- Spring Boot: 3/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Spring Boot</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.58"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+        <div class="skill-dot"></div>
+      </div>
     </div>
+    <!-- Docker: 3/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Docker</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.62"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+        <div class="skill-dot"></div>
+      </div>
     </div>
+    <!-- SQL: 4/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">SQL</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.65"></div></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
+      </div>
     </div>
+    <!-- Git: 4/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Git</span>
-      <div class="skill-bar"><div class="skill-fill" style="--w:.75"></div></div>
-    </div>
-    <div class="skill-item reveal">
-      <span class="skill-name">AI-Native Development</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.75"></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
       </div>
     </div>
+    <!-- AI-Native Development: 4/5 -->
     <div class="skill-item reveal">
-      <span class="skill-name">LLM Integration (OpenAI / Claude)</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.8"></div>
+      <span class="skill-name">AI-Native Dev</span>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
       </div>
     </div>
+    <!-- LLM Integration: 5/5 -->
     <div class="skill-item reveal">
-      <span class="skill-name">Prompting & AI Workflows</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.82"></div>
+      <span class="skill-name">LLM Integration</span>
+      <div class="skill-dots">
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
       </div>
     </div>
+    <!-- Prompting & AI Workflows: 5/5 -->
+    <div class="skill-item reveal">
+      <span class="skill-name">AI Workflows</span>
+      <div class="skill-dots">
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+        <div class="skill-dot filled top"></div>
+      </div>
+    </div>
+    <!-- Architecture: 4/5 -->
     <div class="skill-item reveal">
       <span class="skill-name">Architecture</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.7"></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
       </div>
     </div>
     <div class="skill-item reveal">
       <span class="skill-name">Postgres</span>
-      <div class="skill-bar">
-        <div class="skill-fill" style="--w:.7"></div>
+      <div class="skill-dots">
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot filled"></div>
+        <div class="skill-dot"></div>
       </div>
     </div>
   </div>
@@ -975,17 +1140,12 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-        // ── Intersection Observer for reveal + skill bars ──
+          // ── Intersection Observer for reveal ──
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        const fill = e.target.querySelector('.skill-fill');
-        if (fill) {
-          const w = fill.style.getPropertyValue('--w');
-          fill.style.width = (parseFloat(w) * 100) + '%';
-        }
         io.unobserve(e.target);
       }
     });
@@ -1115,6 +1275,38 @@
     `;
 
     imgArea.addEventListener('click', () => openLightbox(images, 0));
+
+    // ── Auto-rotate images when lightbox is closed ──
+    if (images.length > 1) {
+      let rotateIndex = 0;
+      let rotateTimer = null;
+      const imgEl = imgArea.querySelector('img');
+
+      function startRotation() {
+        rotateTimer = setInterval(() => {
+          if (lb.classList.contains('open')) return; // pause if lightbox open
+          rotateIndex = (rotateIndex + 1) % images.length;
+          imgEl.style.transition = 'opacity .5s ease';
+          imgEl.style.opacity = '0';
+          setTimeout(() => {
+            imgEl.src = images[rotateIndex];
+            imgEl.style.opacity = '1';
+          }, 500);
+        }, 3000);
+      }
+
+      // Start rotation when card enters viewport
+      const rotateIo = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            startRotation();
+          } else {
+            clearInterval(rotateTimer);
+          }
+        });
+      }, { threshold: 0.3 });
+      rotateIo.observe(card);
+    }
   });
 </script>
 </body>
